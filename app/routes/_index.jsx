@@ -7,33 +7,44 @@ export const meta = () => {
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div className="mx-auto max-w-7xl p-6">
+      <h1 className="text-4xl text-white">Work Journal</h1>
+      <p className="mt-3 text-xl text-gray-400">
+        Doings and learnings. Updated weekly.
+      </p>
+
+      <div className="mt-8">
+        <ul>
+          <li>
+            <p>
+              Week of Feb 2<sup>nd</sup>, 2023
+            </p>
+
+            <div className="mt-4 space-y-4">
+              <div>
+                <p>Work</p>
+                <ul className="ml-6 list-disc">
+                  <li>First thing</li>
+                </ul>
+              </div>
+
+              <div>
+                <p>Learning</p>
+                <ul className="ml-6 list-disc">
+                  <li>First thing</li>
+                </ul>
+              </div>
+
+              <div>
+                <p>Interesting things</p>
+                <ul className="ml-6 list-disc">
+                  <li>First thing</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }
