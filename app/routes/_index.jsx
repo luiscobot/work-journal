@@ -1,3 +1,5 @@
+import { Form, redirect } from "@remix-run/react";
+
 export const meta = () => {
   return [
     { title: "New Remix App" },
@@ -5,15 +7,81 @@ export const meta = () => {
   ];
 };
 
+export async function action({ request }) {
+  let formData = await request.formData();
+  let json = Object.fromEntries(formData);
+  console.log("-- formData", json);
+  return redirect("/");
+}
+
 export default function Index() {
   return (
     <div className="mx-auto max-w-7xl p-6">
       <h1 className="text-4xl text-white">Work Journal</h1>
-      <p className="mt-3 text-xl text-gray-400">
+      <p className="mt-3 text-gray-400 text-xl">
         Doings and learnings. Updated weekly.
       </p>
 
-      <div className="mt-8">
+      <div className="my-8 border p-3">
+        <Form method="post">
+          <p className="italic">Create an entry</p>
+
+          <div className="mt-4">
+            <div>
+              <input type="date" name="date" className="text-gray-700" />
+            </div>
+
+            <div className="mt-2 space-x-6">
+              <label>
+                <input
+                  type="radio"
+                  name="category"
+                  value="work"
+                  className="mr-2"
+                />
+                Work
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="category"
+                  value="learning"
+                  className="mr-2"
+                />
+                Learning
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="category"
+                  value="interesting-thing"
+                  className="mr-2"
+                />
+                Interesting thing
+              </label>
+            </div>
+
+            <div className="mt-2">
+              <textarea
+                name="text"
+                placeholder="Write your entry..."
+                className="w-full text-gray-700"
+              ></textarea>
+            </div>
+
+            <div className="mt-2 text-right">
+              <button
+                type="submit"
+                className="bg-blue-500 px-4 py-2 font-medium text-white"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </Form>
+      </div>
+
+      {/* <div className="mt-8">
         <ul>
           <li>
             <p>
@@ -44,7 +112,7 @@ export default function Index() {
             </div>
           </li>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 }
