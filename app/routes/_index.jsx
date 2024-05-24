@@ -1,4 +1,5 @@
 import { Form, redirect } from "@remix-run/react";
+import { PrismaClient } from "@prisma/client";
 
 export const meta = () => {
   return [
@@ -8,9 +9,19 @@ export const meta = () => {
 };
 
 export async function action({ request }) {
-  let formData = await request.formData();
-  let json = Object.fromEntries(formData);
-  console.log("-- formData", json);
+  const db = new PrismaClient();
+
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+
+  await db.entry.create({
+    data: {
+      date: new Date(data.date),
+      category: data.category,
+      comment: data.comment,
+    },
+  });
+
   return redirect("/");
 }
 
@@ -63,10 +74,10 @@ export default function Index() {
 
             <div className="mt-2">
               <textarea
-                name="text"
+                name="comment"
                 placeholder="Write your entry..."
                 className="w-full text-gray-700"
-              ></textarea>
+              />
             </div>
 
             <div className="mt-2 text-right">
